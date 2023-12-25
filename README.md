@@ -1,5 +1,5 @@
 # BC over Unbounded Domains
-Synthesizing Craig Interpolations over non-compact regions via homogenization. 
+Synthesizing BC over unbounded domains via homogenization. 
 
 ## Requirement
 - Julia (version >= 1.9.2): to formulate SOS relaxations and transform them into SDPs
@@ -22,7 +22,9 @@ Please following the steps to prepare the environment:
 
 ## Run Benchmarks
 
-Using Jupyter Notebook to work with the `run_all.ipynb` file. 
+run `julia run_all.jl`
+
+Or, using Jupyter Notebook to work with the `run_all.ipynb` file. 
 
 ## Verify Results
 The results for benchmarks all stored in `Results` directory. We use Mathematica to read these results and verify them. Please refer to the content of `Verify.nb` file. 

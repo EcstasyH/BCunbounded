@@ -9,8 +9,8 @@ Synthesizing BC over unbounded domains via homogenization.
 Please following the steps to prepare the environment:
 1. install julia from https://julialang.org/
 2. Clone this repository from github
-   - run `git clone https://github.com/EcstasyH/Interpolation`
-   - run `cd Interpolation` 
+   - run `git clone https://github.com/EcstasyH/BCunbounded`
+   - run `cd BCunbounded` 
 3. install necessary julia packages
    - run `julia` to start an interactive session 
    - run `import Pkg`
@@ -22,7 +22,7 @@ Please following the steps to prepare the environment:
 
 ## Run Benchmarks
 
-run `julia run_all.jl`
+run `julia run_all.jl`.
 
 Or, using Jupyter Notebook to work with the `run_all.ipynb` file. 
 

@@ -9,6 +9,6 @@ f = [ -2*x1+x1^2+x2,
      ]
 
 # description polynomial of the initial/unsafe set, >=0 by default
-gi = [ 0.25-x1^2-x2^2 ]
+gi = [ 1-(x1-0.5)^2-(x2-0.5)^2 ]
 gu = [ x1*x2-4, -x1]
 bc_deg = 2

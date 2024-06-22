@@ -95,7 +95,7 @@ function bc_completesemi(deg)
 end
 
 
-benchmarks = ["vector-1", "vector-2", "barrier-1", "barrier-2", "lie-der-1", "lie-der-2", "arch1-1", "arch1-2", "arch2-1", "arch2-2", "arch3-1", "arch3-2", "arch4-1", "arch4-2",
+benchmarks = ["just_for_precompiling","vector-1", "vector-2", "barrier-1", "barrier-2", "lie-der-1", "lie-der-2", "arch1-1", "arch1-2", "arch2-1", "arch2-2", "arch3-1", "arch3-2", "arch4-1", "arch4-2",
     "nagumo-1", "nagumo-2", "lotka-1", "lotka-2", "lorenz-1", "lorenz-2"]
 
 for name in benchmarks

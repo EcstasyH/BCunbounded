@@ -315,20 +315,6 @@ RGBColor[0.6900000000000001, 0.52, 0.6900000000000001]},
      FrameLabel -> varSet]]
    ];
 
-
-benchmarks = {"vector-1", "vector-2", "barrier-1", "barrier-2", 
-   "lie-der-1", "lie-der-2", "arch1-1", "arch1-2", "arch2-1", 
-   "arch2-2", "arch3-1", "arch3-2", "arch4-1", "arch4-2", "nagumo-1", 
-   "nagumo-2"};
-For[i = 1, i <= 16, i++,
- benchmarkname = benchmarks[[i]];
- Print["============", benchmarkname, "============"];
- verifytime = 600;
- plot = 1;
- plotRange = {{-4, 4}, {-4, 4}};
- verifyResults[benchmarkname, 1 plot, plotRange, verifytime ];
- ]
-
 benchmarks = {"lorenz-1", "lorenz-2"};
 For[i = 1, i <= 2, i++,
  benchmarkname = benchmarks[[i]];

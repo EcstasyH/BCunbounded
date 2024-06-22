@@ -1,22 +1,22 @@
 # BC over Unbounded Domains
 Synthesizing BC over unbounded domains via homogenization. 
 
-## Requirement
-- Julia (version >= 1.9.2): to formulate SOS relaxations and transform them into SDPs
-- Mosek solver: to solve  SDPs
-- Mathematica (version >= 12): to verify interpolations and plot graphs.
+## Preparation
+- Mosek solver (v10.2) for solving SDPs.
+- Julia (v1.9.2) for formulating Sum-of-Squares relaxations and translating them into SDPs
+- Mathematica (v12) or Wolfram Engine (v14.0) for posterior verification and plotting graphs.
 
 Please following the steps to prepare the environment:
-1. install julia from https://julialang.org/
-2. Clone this repository from github
+1. Install Mosek solver (https://www.mosek.com/downloads/) and apply for an academic license via (https://www.mosek.com/products/academic-licenses/)
+2. Install Julia programming language (https://julialang.org/)
+3. Clone this repository from github
    - run `git clone https://github.com/EcstasyH/BCunbounded`
    - run `cd BCunbounded` 
-3. install necessary julia packages
+4. Install necessary julia packages
    - run `julia` to start an interactive session 
    - run `import Pkg`
    - run `Pkg.activate(".")` to install required packages
    - run `exit()` to quit the interactive session
-4. install Mosek solver and apply for an academic license, see https://www.mosek.com/products/academic-licenses/
 5. (optional, if you want to verify the results and plot the graphs) install Mathematica
    - Mathematica becomes inefficient when the problem instance involves too many variables and/or the degree is too large. 
 

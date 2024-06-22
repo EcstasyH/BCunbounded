@@ -320,7 +320,7 @@ For[i = 1, i <= 2, i++,
  benchmarkname = benchmarks[[i]];
  Print["============", benchmarkname, "============"];
  verifytime = 600;
- plot = 0;
+ plot = 1;
  plotRange = {{-4, 4}, {-4, 4}, {-4, 4}};
  verifyResults[benchmarkname, plot, plotRange, verifytime];
 ]

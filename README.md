@@ -1,12 +1,20 @@
-# On Completeness of SDP-Based Barrier Certificate Synthesis over Unbounded Domains
-Synthesizing BC over unbounded domains via homogenization. 
+# Synthesizing BC over unbounded domains via homogenization.
 
-## Preparation 
+This file describes the research artifact for the publication:
+
+On Completeness of SDP-Based Barrier Certificate Synthesis over Unbounded Domains
+Hao Wu, Shenghua Feng, Ting Gan, Jie Wang, Bican Xia and Naijun Zhan
+FM 2024 (Embedded System track)
+Paper 113
+
+This artifact is distributed as a virtual machine (VM) in OVA format. The VM contains an installation of Ubuntu 22.04, along with the required software. The VM was created and tested using Oracle VirtualBox 7.0.18 running on a Windows 10 laptop with 16 GB of RAM and an intel i9-12900K CPU 2.50 GHz. During production the VM was allocated 4 GB of RAM and 1 processor through VirtualBox. The VM account is `vboxuser` and the password is `qwer12321`.
+
+## Preparation
 - Mosek solver (v10.2) for solving SDPs.
 - Julia (v1.9.2) for formulating Sum-of-Squares relaxations and translating them into SDPs
 - Mathematica (v12) or Wolfram Engine (v14.0) for posterior verification and plotting graphs.
 
-Either use the virtual machine or follow the instructions to prepare the environment:
+Skip this part if  use the virtual machine image  Follow the instructions to prepare the environment:
 1. Install Mosek solver (https://www.mosek.com/downloads/) and apply for an academic license via (https://www.mosek.com/products/academic-licenses/)
 2. Install Julia programming language (https://julialang.org/)
 3. Clone this repository from github
@@ -18,17 +26,35 @@ Either use the virtual machine or follow the instructions to prepare the environ
    - run `Pkg.activate(".")` to activate the environment
    - run `Pkg.instantiate()` to download necessary dependencies
    - run `exit()` to quit the interactive session
-5. (optional, if you want to verify the results and plot the graphs) install Mathematica
-   - Mathematica becomes inefficient when the problem instance involves too many variables and/or the degree is too large. 
+5. Optional, if you want to verify the results and plot the graphs. Install Mathematica (commercial, https://www.wolfram.com/mathematica/) or Wolfram Engine (free but needs a developer licence, https://www.wolfram.com/engine/). 
 
-## Experiments
-The experiments consist of two parts: (1) Compute barrier certificate candidates within the degree range using Julia (2) verify the candidates using Mathematica.   
+**File Structure**
+```
+- Benchmarks/      % all benchmarks written in Julia
+- Results/         % SDP computation results
+   - system/       % system information for Mathematica to read
+   - sound/        % results using Thm 3 
+   - complete/     % results using Thm 5
+   - completesemi/ % results using Thm 7
+   - plots/        % trajectory plots using Mathematica
+- run.jl           % solver SOS programs (Thm 3,5,7) using Mosek 
+- verify.wls       % Molfram Engine script for verification
+- verify.nb        % Mathematica notebook file for verifcation
+- clean.sh         % script for clean results
+```
 
-- To compute barrier certificate candidates for all benchmarks, run `julia run.jl`.
-- To verify results in the first step, run `wolframscript verify.wls > result.txt`
+## Evaluation Instructions
+The purpose of the artifact is to substantiate the experimental results in Table 1 and Fig 1. The experiment consists of two parts: (1) Compute barrier certificate candidates within the degree range using Julia; (2) Verify the candidates using Mathematica/Wolfram Engine.   
 
 
-## Verify Results
-The results for benchmarks all stored in `Results` directory. We use Mathematica to read these results and verify them. Please refer to the content of `Verify.nb` file. 
+- To compute barrier certificate candidates for all benchmarks, run `julia run.jl`. It will search for polynomial barrier certificates from degree 1 to 6 (using **Thm. 3** and **Thm. 5**) and semialgebraic barrier certificates from degree 1 to 4 (using **Thm. 7**). The returned candidates as well as the time overhead will be stored in `Results/` directory.
+- To verify results in the first step, run `wolframscript verify.wls > result.txt`. The wolframe engine reads the results in `Results/` directory and tries to prove the barrier certificate candidates satisfy the barrier certificate conditions. If not, a point violating the conditions will be returned by using `FindInstance` function. 
 
-## File Structure
+The output file `result.txt` will contain all the information within Table 1. Finally, the plots of all benchmarks can be found within the `Results/plots` folder.
+
+## Claims
+1. In our paper, all experiments were performed on a Mac lap-top with Apple M2 chip and 8GB memory. When preparing the artifact, we find that the verification step in VM typically takes more time. Though the verification time was not reported in our paper, this can lead to more question marks in Table 1 for benchmark `lorenz` and `lotka`. 
+
+2. As explained in our paper, the time in Table 1 does not contain the verification time. Moreover, if a valid barrier certificate is found at degree 4, we do not count the SDP time overhead for degree 5 and 6.
+
+3. Due to some unknown reasons, the Wolfram engine may crush when plotting graphs for 3d benchmarks (especially for `lorenz-2`). If this happens, please run `wolframscript verify3d.wls > result3d.txt` to separately verify the `lorenz` and `lotka` benchmark and only plot for `lorenz-1` benchmark.

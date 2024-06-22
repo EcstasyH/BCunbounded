@@ -11,4 +11,3 @@ f = [ 10*(x2-x1),
 # description polynomial of the initial/unsafe set, >=0 by default
 gi = [ 1 - (x1+14.5)^2 - (x2 + 14.5)^2 - (x3-12.5)^2 ]  
 gu = [ 1 - (x1+16.5)^2 - (x2 + 14.5)^2 - (x3-2.5)^2 ]
-bc_deg = 5

@@ -315,22 +315,16 @@ RGBColor[0.6900000000000001, 0.52, 0.6900000000000001]},
      FrameLabel -> varSet]]
    ];
 
-benchmarks = {"lorenz-1", "lorenz-2"};
-For[i = 1, i <= 2, i++,
- benchmarkname = benchmarks[[i]];
- Print["============", benchmarkname, "============"];
- verifytime = 600;
- plot = 1;
- plotRange = {{-20, 20}, {-20, 20}, {-20, 20}};
- verifyResults[benchmarkname, plot, plotRange, verifytime];
- ]
+benchmarkname = "lorenz-1";
+Print["============", benchmarkname, "============"];
+verifytime = 600;
+plot = 1;
+plotRange = {{-20, 20}, {-20, 20}, {-20, 20}};
+verifyResults[benchmarkname, plot, plotRange, verifytime];
 
-benchmarks = {"lotka-1", "lotka-2"};
-For[i = 1, i <= 2, i++,
- benchmarkname = benchmarks[[i]];
- Print["============", benchmarkname, "============"];
- verifytime = 600;
- plot = 1;
- plotRange = {{-4, 4}, {-4, 4}, {-4, 4}};
- verifyResults[benchmarkname, plot, plotRange, verifytime];
- ]
+benchmarkname = "lorenz-2";
+Print["============", benchmarkname, "============"];
+verifytime = 600;
+plot = 0;
+plotRange = {{-20, 20}, {-20, 20}, {-20, 20}};
+verifyResults[benchmarkname, plot, plotRange, verifytime];

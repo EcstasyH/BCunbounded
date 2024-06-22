@@ -11,5 +11,4 @@ f = [ -x1 + 2*x1^3*x2^2,
 # description polynomial of the initial/unsafe set, >=0 by default
 gi = [ 1-x1^2, x2 - 2 ]
 gu = [ 1-x1^2, -2 - x2 ]
-bc_deg = 1
      

@@ -1,5 +1,6 @@
 using Pkg
 Pkg.activate(".")
+Pkg.instantiate()
 
 using JuMP
 using MosekTools
@@ -11,10 +12,10 @@ using LinearAlgebra
 ϵ = 10^(-5) # ϵ_e in paper
 λ = -1      # parameter in exponential type barrier certificate
 @polyvar x0 # homogenization variable
-@polyvar u
-@polyvar v
-sos_tol = 1
-error = 5
+@polyvar u  # introduced variable for semialgebraic barrier certificate
+@polyvar v  # u*v = 1
+sos_tol = 1 # the maximum degree of unknown SOS polynomials = deg + sos_tol 
+error = 5   # precision digit places
 
 function bc_bound(deg)
     # synthesize BC by using the sound characterization for bounded domains
@@ -25,7 +26,6 @@ function bc_bound(deg)
     
     B, Bc, Bb = add_poly!(model, vars, deg)    
     dBdt = dot(differentiate(B, vars), f)
-    d_relax = div(deg+1,2)
 
     model,info1 = add_psatz!(model, -B, vars, gi, [], div(deg+sos_tol,2), QUIET=true, CS=false, TS=false, Groebnerbasis=true)
     model,info2 = add_psatz!(model, B-ϵ , vars, gu, [], div(deg+sos_tol,2), QUIET=true, CS=false, TS=false, Groebnerbasis=true)
@@ -36,9 +36,6 @@ function bc_bound(deg)
     Bc = value.(Bc)  
     for i in 1:length(Bc)
         Bc[i] = round(Bc[i]; digits = error)
-        # if Bc[i] <= ϵ && Bc[i] >= -ϵ
-        #     Bc[i] = 0
-        # end
     end
     return Bc'*Bb
 end
@@ -62,9 +59,6 @@ function bc_complete(deg)
     Bc = value.(Bc)  
     for i in 1:length(Bc)
         Bc[i] = round(Bc[i]; digits = error)
-        # if Bc[i] <= ϵ && Bc[i] >= -ϵ
-        #     Bc[i] = 0
-        # end
     end
     return Bc'*Bb
 end
@@ -92,16 +86,10 @@ function bc_completesemi(deg)
     Bc1 = value.(Bc1)  
     for i in 1:length(Bc1)
         Bc1[i] = round(Bc1[i]; digits = error)
-        # if Bc1[i] <= ϵ && Bc1[i] >= -ϵ
-        #     Bc1[i] = 0
-        # end
     end
     Bc2 = value.(Bc2)  
     for i in 1:length(Bc2)
         Bc2[i] = round(Bc2[i]; digits = error)
-        # if Bc2[i] <= ϵ && Bc2[i] >= -ϵ
-        #     Bc2[i] = 0
-        # end
     end
     return Bc1'*Bb1+u*Bc2'*Bb2
 end
@@ -131,7 +119,6 @@ for name in benchmarks
         stats = @timed B = bc_bound(deg)
         write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
         write(file, string(stats.time)*"\n") 
-        # println("1:",stats.time)
     end
     close(file)
     
@@ -141,7 +128,6 @@ for name in benchmarks
         stats = @timed B = bc_complete(deg)
         write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
         write(file, string(stats.time)*"\n") 
-        # println("2:",stats.time)
     end
     close(file)
     
@@ -151,7 +137,6 @@ for name in benchmarks
         stats = @timed B = bc_completesemi(deg)
         write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
         write(file, string(stats.time)*"\n") 
-        # println("3:",stats.time)
     end
     close(file)
 end

@@ -64,4 +64,4 @@ The output file `result.txt` will contain all the information within Table 1. Fi
 
 2. As explained in our paper, the time in Table 1 does not contain the verification time. Moreover, if a valid barrier certificate is found at degree 4, we do not count the SDP time overhead for degree 5 and 6.
 
-3. Due to some unknown reasons, the Wolfram engine may crush after running for 20~30 minutes in VM (especially when verifying `lorenz` and `lotka` results). If this happens, please run `wolframscript verify_lorenz.wls > result_lorenz.txt` or `wolframscript verify_lotka.wls > result_lotka.txt` to separately verify the `lorenz` and `lotka` benchmarks.
+3. Due to some unknown reasons, the Wolfram engine may crush after running for 20~30 minutes in VM (especially when verifying `lorenz-2`). If this happens, please run `wolframscript verify_lorenz.wls > result_lorenz.txt` or `wolframscript verify_lotka.wls > result_lotka.txt` to separately verify the `lorenz` and `lotka` benchmarks.

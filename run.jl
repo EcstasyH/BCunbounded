@@ -32,7 +32,7 @@ function bc_bound(deg)
     model,info3 = add_psatz!(model, λ*B-dBdt , vars, [], [], div(maxdegree(λ*B-dBdt)+sos_tol,2), QUIET=true, CS=false, TS=false, Groebnerbasis=true)
 
     optimize!(model)
-    status = termination_status(model)
+    # status = termination_status(model)
     Bc = value.(Bc)  
     for i in 1:length(Bc)
         Bc[i] = round(Bc[i]; digits = error)
@@ -123,21 +123,21 @@ for name in benchmarks
     close(file)
     
     # print homogenization approach results
-    file = open("./Results/complete/"*name*".txt", "w");
-    for deg = 1:6
-        stats = @timed B = bc_complete(deg)
-        write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
-        write(file, string(stats.time)*"\n") 
-    end
-    close(file)
+    # file = open("./Results/complete/"*name*".txt", "w");
+    # for deg = 1:6
+    #     stats = @timed B = bc_complete(deg)
+    #     write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
+    #     write(file, string(stats.time)*"\n") 
+    # end
+    # close(file)
     
-    # print homogenization approach results
-    file = open("./Results/completesemi/"*name*".txt", "w");
-    for deg = 1:4
-        stats = @timed B = bc_completesemi(deg)
-        write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
-        write(file, string(stats.time)*"\n") 
-    end
+    # # print homogenization approach results
+    # file = open("./Results/completesemi/"*name*".txt", "w");
+    # for deg = 1:4
+    #     stats = @timed B = bc_completesemi(deg)
+    #     write(file, Base.replace(string(B),"e"=>"*10^")*"\n")
+    #     write(file, string(stats.time)*"\n") 
+    # end
     close(file)
 end
 

@@ -7,10 +7,14 @@ Hao Wu, Shenghua Feng, Ting Gan, Jie Wang, Bican Xia and Naijun Zhan
 FM 2024 (Embedded System track)
 Paper 113
 
+## Updates
+
+- 2025.2.10, update julia and packages to fix a bug.
+
 ## Preparation
 
 - Mosek solver (v10.2) for solving SDPs.
-- Julia (v1.9.2) for formulating Sum-of-Squares relaxations and translating them into SDPs
+- Julia (v1.11.3) for formulating Sum-of-Squares relaxations and translating them into SDPs
 - Mathematica (v12) or Wolfram Engine (v14.0) for posterior verification and plotting graphs.
 
 (Skip this part if you are using the virtual machine image.) Follow the instructions to prepare the environment:
